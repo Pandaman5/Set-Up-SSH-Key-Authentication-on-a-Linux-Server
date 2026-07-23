@@ -23,6 +23,7 @@ Command Line:  Windows program that allows users to type commands
 Firewall:      A program that protects a device by following a set of rules
 
 ##Execution Steps:
+(Note: There are screenshots in the "Screenshots" folder on the Github page if needed)
 #Step 1: Aquire Prerequisites and Clearance:
 Step 1.1: Identify Server:
 - Find the server that you want to configure SSH key authentication on.
