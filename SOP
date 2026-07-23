@@ -15,7 +15,6 @@ This document covers the following:
 - Verifying SSH services
 
 ##Execution Steps:
-
 #Step 1: Aquire Prerequisites and Clearance:
 Step 1.1: Identify Server:
 - Find the server that you want to configure SSH key authentication on.
@@ -108,15 +107,26 @@ Step 6.2: Restart SSH services:
 Step 7.1: Add an SSH firewall rule:
 - In the server terminal, enter this command "sudo firewall-cmd --zone=public --permanent --add-service=ssh"
   - If the output says "Warning: ALREADY_ENABLED: ssh; success", then the rule is already in place, and you can skip to Step 8.
-
+- Enter this command "sudo firewall-cmd --reload" to apply the modification
 
 #Step 8: Connect Client To Server:
 Step 8.1: 
-- On the client command line, enter the command "ssh -i id_rsa admin@172.19.214.249"
+- On the client command line, enter the command "ssh -i id_rsa 'Insert server account'@'Insert server IP address"
   - You will need to enter the SSH key password if you made one.
-- 
 
-
+#Common Issues/Troubleshooting:
+Issue 1: SSH communication is blocked
+- Can the client ping the server? If not:
+  - Check both devices connection properties. (Windows: Network Connection Settings | RHEL: "ip a" command)
+    - Check ports ipv4 settings on windows (Windows: Right click port/Properties/(TCP/IPv4))
+    - Check edit port settings on RHEL (RHEL: nmcli con up 'insert connection' | nmcli con modify 'insert connection' ...)
+      - To learn more on how to modify RHEL connections, use the "man nmcli" command
+- If the devices can ping eachother, something might be blocking the SSH services.
+  - Revisit Step 7 to verify that you configured the firewall correctly.
+Issue 2: Server can't download SSH:
+- Check if the server is registered with this command "sudo subscription-manager identity"
+  - If the output says that "This system is not yet registered...", then you will have to get the server registered.
+    - RHEL registration is beyond this document, but you can find documentaion on this process at Red Hat Documentation.
 
 ##References:
 - CodingsLog, (2025, Aug 3). How to Configure SSH on RHEL | Password & Key-Based Authentication | Step-by-Step Tutorial [Video]. Youtune. https://www.youtube.com/watch?v=1csNQTO1e-0
