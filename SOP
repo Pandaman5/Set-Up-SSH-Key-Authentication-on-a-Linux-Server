@@ -22,6 +22,17 @@ Terminal:      RHEL program that allows users to type commands
 Command Line:  Windows program that allows users to type commands
 Firewall:      A program that protects a device by following a set of rules
 
+##Accountability Matrix:
+|            Tasks/Steps             | Responsible Person/Team |   Emergency Contact   | Non-Emergency Contact |   Review/Approval    |
+| Aquire Prerequisites And Clearance |  System Administrators  | Phone: ... Email: ... | Phone: ... Email: ... |     IT Manager       |
+|         Set Up Enviroment          |  System Administrators  | Phone: ... Email: ... | Phone: ... Email: ... |  Head System Admin   |
+| Verifying/Downloading SSH Services | Quality Assurance Team  | Phone: ... Email: ... | Phone: ... Email: ... |  Head System Admin   |
+|  Create SSH Key On Client Device   |  Server Administrators  | Phone: ... Email: ... | Phone: ... Email: ... |  Head Server Admin   |
+| Transfer Public SSH Key To Server  |  Server Administrators  | Phone: ... Email: ... | Phone: ... Email: ... |  Head Server Admin   |
+|   Edit SSH_Config File On Server   | Quality Assurance Team  | Phone: ... Email: ... | Phone: ... Email: ... |  Head Server Admin   |
+|       Modify/Verify Firewall       |      Security Team      | Phone: ... Email: ... | Phone: ... Email: ... | Head Security Admin  |
+|      Connect Client To Server      |  System Administrators  | Phone: ... Email: ... | Phone: ... Email: ... |     IT Manager       |
+
 ##Execution Steps:
 (Note: There are screenshots in the "Screenshots" folder on the Github page if needed)
 #Step 1: Aquire Prerequisites and Clearance:
@@ -57,7 +68,7 @@ Step 2.4: Connect client to server:
   - Checking the lights on the ethernet ports on the client and server to see if their on
   - Search "View network connections" in the windows searchbar and check the properties of the connection used to see if its operational
 
-#Step 3: Verifying/Downloading SSH services:
+#Step 3: Verifying/Downloading SSH Services:
 Step 3.1: Verify SSH:
 - In the terminal, type "systemctl status sshd.service", and press enter. The output should show you if SSH services are already running on the server.
   - If the output contains the green text "active (running)", that means that SSH services are currently functional, and you can skip to Step 4.
