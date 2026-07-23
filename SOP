@@ -1,10 +1,12 @@
 ###Set Up SSH Key Authentication on a Linux Server
 
 ##Purpose:
-This document outlines the standard procedure for configuring SSH key authentication on a linux server. For this document, we will be using Red Hat Enterprise Linux as the server, and Windows 11 aas the workstation.
+This document outlines the standard procedure for configuring SSH key authentication on a linux server. For this document, we will be using 
+Red Hat Enterprise Linux as the server, and Windows 11 aas the workstation.
 
 ##Audience:
-This document is intended for system admins, server admins, and other member of the IT team that are involved in configuring communication with the server.
+This document is intended for system admins, server admins, and other member of the IT team that are involved in configuring communication 
+with the server.
 
 ##Scope:
 This document covers the following:
