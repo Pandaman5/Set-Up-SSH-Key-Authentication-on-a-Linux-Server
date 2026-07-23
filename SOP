@@ -1,14 +1,14 @@
-###Set Up SSH Key Authentication on a Linux Server
+### Set Up SSH Key Authentication on a Linux Server
 
-##Purpose:
+## Purpose:
 This document outlines the standard procedure for configuring SSH key authentication on a linux server. For this document, 
 we will be using Red Hat Enterprise Linux as the server, and Windows 11 aas the workstation.
 
-##Audience:
+## Audience:
 This document is intended for system admins, server admins, and other member of the IT team that are involved in configuring 
 communication with the server.
 
-##Scope:
+## Scope:
 This document covers the following:
 - Preparing a Linux server for remote administration
 - Installing SSH
@@ -16,7 +16,7 @@ This document covers the following:
 - Generating and transfering keys
 - Verifying SSH services
 
-##Definition:
+## Definition:
 RHEL:          Red Hat Enterprise Linux
 SSH:           Secure Shell | A protocol used to remotely access servers and workstations
 SSH Key:       A cryptographic file that can be transfered to another device for SSH authentication
@@ -24,7 +24,7 @@ Terminal:      RHEL program that allows users to type commands
 Command Line:  Windows program that allows users to type commands
 Firewall:      A program that protects a device by following a set of rules
 
-##Accountability Matrix:
+## Accountability Matrix:
 |            Tasks/Steps             | Responsible Person/Team |   Emergency Contact   | Non-Emergency Contact |   Review/Approval    |
 | Aquire Prerequisites And Clearance |  System Administrators  | Phone: ... Email: ... | Phone: ... Email: ... |     IT Manager       |
 |         Set Up Enviroment          |  System Administrators  | Phone: ... Email: ... | Phone: ... Email: ... |  Head System Admin   |
@@ -35,7 +35,7 @@ Firewall:      A program that protects a device by following a set of rules
 |       Modify/Verify Firewall       |      Security Team      | Phone: ... Email: ... | Phone: ... Email: ... | Head Security Admin  |
 |      Connect Client To Server      |  System Administrators  | Phone: ... Email: ... | Phone: ... Email: ... |     IT Manager       |
 
-##Execution Steps:
+## Execution Steps:
 (Note: There are screenshots in the "Screenshots" folder on the Github page if needed)
 #Step 1: Aquire Prerequisites and Clearance:
 Step 1.1: Identify Server:
@@ -54,7 +54,7 @@ Step 1.4: Identify client device:
 - SSH connections has a client connecting to a recipient. The server is the recipient, but we need a client to send the connetion. 
 - The client should be a workstation/laptop that can comnnect to the server. We will be using a Windows 11 laptop.
 
-#Step 2: Set Up Enviroment:
+# Step 2: Set Up Enviroment:
 Step 2.1: Connect server with power and all peripherals needed:
 - Make sure the server has a source of power.
 - Connect any peripherals chosen in Step 1.3.
@@ -72,7 +72,7 @@ Step 2.4: Connect client to server:
   - Search "View network connections" in the windows searchbar and check the properties of the connection 
   used to see if its operational
 
-#Step 3: Verifying/Downloading SSH Services:
+# Step 3: Verifying/Downloading SSH Services:
 Step 3.1: Verify SSH:
 - In the terminal, type "systemctl status sshd.service", and press enter. The output should show you if SSH services are 
 already running on the server.
@@ -84,7 +84,7 @@ Step 3.2: Download SSH:
 - Type "yum install openssh-server" into the terminal to download the most recent SSH services
 - Type "systemctl start sshd" to start the SSH services.
 
-#Step 4: Create SSH Key On Client Device:
+# Step 4: Create SSH Key On Client Device:
 Step 4.1: Open command line in client
 - Open a command line window on the client device. You can do this by typing "cmd" in the windows searchbar, and pressing enter
 Step 4.2: Create the SSH key 
@@ -98,7 +98,7 @@ Step 4.3: Verify SSH key
   - Example "cd C:\Users\'Insert Username'/.ssh"
 - Type "dir", and press enter. The output should include the public key (Example: "id_rsa.pub")
 
-#Step 5: Transfer Public SSH Key To Server:
+# Step 5: Transfer Public SSH Key To Server:
 Step 5.1: Verify that server has the .ssh directory:
 - The .ssh directory is where the public key from the client will be stored. On the terminal on the server, type "cd ~" 
 to verify that you are in the right directory
@@ -119,7 +119,7 @@ Step 5.4: Verify transfer:
   - "ls"
 - The output should list "authorized_keys" as an item.
 
-#Step 6: Edit SSH_Config File On Server:
+# Step 6: Edit SSH_Config File On Server:
 Step 6.1: Edit sshd_config file in Nano
 - In the server terminal enter the command "sudo nano /etc/ssh/sshd_config" to edit the ssh configuration file.
   - May need to enter the root user password.
@@ -132,18 +132,18 @@ Step 6.2: Restart SSH services:
 - In the server terminal, enter "systemctl restart sshd.service"
   - You may need to enter the admin password
 
-#Step 7: Modify/Verify Firewall:
+# Step 7: Modify/Verify Firewall:
 Step 7.1: Add an SSH firewall rule:
 - In the server terminal, enter this command "sudo firewall-cmd --zone=public --permanent --add-service=ssh"
   - If the output says "Warning: ALREADY_ENABLED: ssh; success", then the rule is already in place, and you can skip to Step 8.
 - Enter this command "sudo firewall-cmd --reload" to apply the modification
 
-#Step 8: Connect Client To Server:
+# Step 8: Connect Client To Server:
 Step 8.1: 
 - On the client command line, enter the command "ssh -i id_rsa 'Insert server account'@'Insert server IP address"
   - You will need to enter the SSH key password if you made one.
 
-#Common Issues/Troubleshooting:
+# Common Issues/Troubleshooting:
 Issue 1: SSH communication is blocked
 - Can the client ping the server? If not:
   - Check both devices connection properties. (Windows: Network Connection Settings | RHEL: "ip a" command)
@@ -157,13 +157,13 @@ Issue 2: Server can't download SSH:
   - If the output says that "This system is not yet registered...", then you will have to get the server registered.
     - RHEL registration is beyond this document, but you can find documentaion on this process at Red Hat Documentation.
 
-##References:
+## References:
 - CodingsLog, (2025, Aug 3). How to Configure SSH on RHEL | Password & Key-Based Authentication | Step-by-Step Tutorial [Video]. 
 Youtune. https://www.youtube.com/watch?v=1csNQTO1e-0
 - Chavan, S. C. (2026, July 19). It knowledge base: What it is and how to create one. 
 HeroThemes. https://herothemes.com/blog/it-knowledge-base/ 
 
-##Revision History:
+## Revision History:
 | Ver. |    Date    | Changes Made By |      Summary of Changes     |
 |------|------------|-----------------|-----------------------------|
 | 1.0  | 2026-07-23 |    Josh Fehr    | Created Inital SOP Document |
