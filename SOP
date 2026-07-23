@@ -17,29 +17,37 @@ This document covers the following:
 ##Execution Steps:
 
 #Step 1: Aquire Prerequisites and Clearance:
-Step 1.1: Identify Server
+Step 1.1: Identify Server:
 - Find the server that you want to configure SSH key authentication on.
-Step 1.2: Get clearance/login credentials
+Step 1.2: Get clearance/login credentials:
 - Ask the administrator with clearance if you are allowed to configure SSH key authentication on.
 - Get a login that is used on the server that has priveleges to configure SSH on the server.
-Step 1.3: Get any peripheral devices needed to interface with the server
+Step 1.3: Get any peripheral devices needed to interface with the server:
 - You will need a method of interfacing with the server. Options include:
   - Monitor, mouse, and keyboard
   - Console cable, and laptop
   - Rack mounted monitor and keyboard
 - The interface method is up to you, but we will be simulating a physical connection with a monitor, mouse, and keyboard using VMWare Workstation.
+Step 1.4: Identify client device:
+- SSH connections has a client connecting to a recipient. The server is the recipient, but we need a client to send the connetion. 
+- The client should be a workstation/laptop that can comnnect to the server. We will be using a Windows 11 laptop.
 
 #Step 2: Set Up Enviroment:
-Step 2.1: Connect server with power and all peripherals needed
+Step 2.1: Connect server with power and all peripherals needed:
 - Make sure the server has a source of power.
 - Connect any peripherals chosen in Step 1.3.
-Step 2.2: Turn on server and log in
+Step 2.2: Turn on server and log in:
 - Turn on the server and let it boot to the RHEL login screen.
 - Log in using the credentials aquired in step 1.2.
-Step 2.3: Get to the terminal
+Step 2.3: Get to the terminal:
 - Once logged in, click the search bar at the top center of the screen.
   - If you don't see the search bar, press the red hat icon at the top left of the screen to reveal it.
 - Type "terminal", and press enter.
+Step 2.4: Connect client to server:
+- Connect the client device decided in Step 1.4 to the server.
+- Verify that the connection is open by:
+  - Checking the lights on the ethernet ports on the client and server to see if their on
+  - Search "View network connections" in the windows searchbar and check the properties of the connection used to see if its operational
 
 #Step 3: Verifying/Downloading SSH services:
 Step 3.1: Verify SSH:
@@ -50,9 +58,67 @@ Step 3.2: Download SSH:
 - Type "yum install openssh-server" into the terminal to download the most recent SSH services
 - Type "systemctl start sshd" to start the SSH services.
 
+#Step 4: Create SSH Key On Client Device:
+Step 4.1: Open command line in client
+- Open a command line window on the client device. You can do this by typing "cmd" in the windows searchbar, and pressing enter
+Step 4.2: Create the SSH key 
+- In the command line, type the following commands:
+  - "ssh-keygen -t rsa"
+  - *Insert file location you want to save the SSH key*
+  - *Insert password to use the SSH key, or leave empty for no password. A password is highly reccomended for security*
+  - *Repeat input from the previouse line*
+Step 4.3: Verify SSH key
+- On the client command line, go to the file location of the public file. This can be done using the cd command
+  - Example "cd C:\Users\'Insert Username'/.ssh"
+- Type "dir", and press enter. The output should include the public key (Example: "id_rsa.pub")
+
+#Step 5: Transfer Public SSH Key To Server:
+Step 5.1: Verify that server has the .ssh directory:
+- The .ssh directory is where the public key from the client will be stored. On the terminal on the server, type "cd ~" to verify that you are in the right directory
+- Type "ls -la", then press enter. If the output includes ".ssh", then you already have the file. If you already have the correct file, move to Step 5.3.
+Step 5.2: Create the .ssh directory:
+- In the terminal, type "mkdir .ssh" then press enter. This will create the directory.
+- Use the "ls -la" to verify that the .ssh directory was created.
+Step 5.3: Transfer the public SSH key
+- Back to the client command line. Type the following commands:
+  - "scp 'public key name' 'Server Admin User'@'server ip address':~/.ssh/authorized_keys"
+    -  Example "scp id_rsa.pub admin@172.19.214.249:~/.ssh/authorized_keys"
+  - "yes"
+  - *Insert Password if applicable*
+Step 5.4: Verify transfer:
+- On the server terminal, enter the following commands:
+  - "cd ~/.ssh/"
+  - "ls"
+- The output should list "authorized_keys" as an item.
+
+#Step 6: Edit SSH_Config File On Server:
+Step 6.1: Edit sshd_config file in Nano
+- In the server terminal enter the command "sudo nano /etc/ssh/sshd_config" to edit the ssh configuration file.
+  - May need to enter the root user password.
+- In the sshd_config file, edit the following line in the document to the new lines:
+  - "#PasswordAuthentication yes" --> "PasswordAuthentication no"
+- Verify that the "AuthorizedKeysFile" is set to ".ssh/autheroized_keys"
+- Once all edits are made, press "X", then press "Y" to save modifications.
+- Lastly, press enter to save to the "sshd_config" file
+Step 6.2: Restart SSH services:
+- In the server terminal, enter "systemctl restart sshd.service"
+  - You may need to enter the admin password
+
+#Step 7: Modify/Verify Firewall:
+Step 7.1: Add an SSH firewall rule:
+- In the server terminal, enter this command "sudo firewall-cmd --zone=public --permanent --add-service=ssh"
+  - If the output says "Warning: ALREADY_ENABLED: ssh; success", then the rule is already in place, and you can skip to Step 8.
+
+
+#Step 8: Connect Client To Server:
+Step 8.1: 
+- On the client command line, enter the command "ssh -i id_rsa admin@172.19.214.249"
+  - You will need to enter the SSH key password if you made one.
+- 
 
 
 
-
-
+##References:
+- CodingsLog, (2025, Aug 3). How to Configure SSH on RHEL | Password & Key-Based Authentication | Step-by-Step Tutorial [Video]. Youtune. https://www.youtube.com/watch?v=1csNQTO1e-0
+- Chavan, S. C. (2026, July 19). It knowledge base: What it is and how to create one. HeroThemes. https://herothemes.com/blog/it-knowledge-base/ 
 
