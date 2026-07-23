@@ -158,10 +158,10 @@ Issue 2: Server can't download SSH:
     - RHEL registration is beyond this document, but you can find documentaion on this process at Red Hat Documentation.
 
 ##References:
-- CodingsLog, (2025, Aug 3). How to Configure SSH on RHEL | Password & Key-Based Authentication | Step-by-Step Tutorial [Video]. Youtune. 
-https://www.youtube.com/watch?v=1csNQTO1e-0
-- Chavan, S. C. (2026, July 19). It knowledge base: What it is and how to create one. HeroThemes. 
-https://herothemes.com/blog/it-knowledge-base/ 
+- CodingsLog, (2025, Aug 3). How to Configure SSH on RHEL | Password & Key-Based Authentication | Step-by-Step Tutorial [Video]. 
+Youtune. https://www.youtube.com/watch?v=1csNQTO1e-0
+- Chavan, S. C. (2026, July 19). It knowledge base: What it is and how to create one. 
+HeroThemes. https://herothemes.com/blog/it-knowledge-base/ 
 
 ##Revision History:
 | Ver. |    Date    | Changes Made By |      Summary of Changes     |
