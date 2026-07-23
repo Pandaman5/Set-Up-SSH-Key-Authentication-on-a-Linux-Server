@@ -14,6 +14,14 @@ This document covers the following:
 - Generating and transfering keys
 - Verifying SSH services
 
+##Definition:
+RHEL:          Red Hat Enterprise Linux
+SSH:           Secure Shell | A protocol used to remotely access servers and workstations
+SSH Key:       A cryptographic file that can be transfered to another device for SSH authentication
+Terminal:      RHEL program that allows users to type commands
+Command Line:  Windows program that allows users to type commands
+Firewall:      A program that protects a device by following a set of rules
+
 ##Execution Steps:
 #Step 1: Aquire Prerequisites and Clearance:
 Step 1.1: Identify Server:
@@ -131,4 +139,8 @@ Issue 2: Server can't download SSH:
 ##References:
 - CodingsLog, (2025, Aug 3). How to Configure SSH on RHEL | Password & Key-Based Authentication | Step-by-Step Tutorial [Video]. Youtune. https://www.youtube.com/watch?v=1csNQTO1e-0
 - Chavan, S. C. (2026, July 19). It knowledge base: What it is and how to create one. HeroThemes. https://herothemes.com/blog/it-knowledge-base/ 
+
+##Revision History:
+| Ver. |    Date    | Changes Made By |      Summary of Changes     |
+| 1.0  | 2026-07-23 |    Josh Fehr    | Created Inital SOP Document |
 
