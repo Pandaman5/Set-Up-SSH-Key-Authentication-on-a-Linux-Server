@@ -26,6 +26,7 @@ Firewall:      A program that protects a device by following a set of rules
 
 ## Accountability Matrix:
 |            Tasks/Steps             | Responsible Person/Team |   Emergency Contact   | Non-Emergency Contact |   Review/Approval    |
+|------------------------------------|-------------------------|-----------------------|-----------------------|----------------------|
 | Aquire Prerequisites And Clearance |  System Administrators  | Phone: ... Email: ... | Phone: ... Email: ... |     IT Manager       |
 |         Set Up Enviroment          |  System Administrators  | Phone: ... Email: ... | Phone: ... Email: ... |  Head System Admin   |
 | Verifying/Downloading SSH Services | Quality Assurance Team  | Phone: ... Email: ... | Phone: ... Email: ... |  Head System Admin   |
